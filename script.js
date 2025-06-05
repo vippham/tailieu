@@ -175,3 +175,30 @@ function filterTable() {
     }
 }
 fetchSheetData();
+const typingTextEl = document.querySelector('.typing-text');
+const typingString = "Phát triển với ❤️, Google Sheets API, Tailwind CSS & DaisyUI bởi Khang Ngô và Phúc Tiến.";
+let index = 0;
+let isDeleting = false;
+
+function typeEffect() {
+    if (!typingTextEl) return;
+
+    if (isDeleting) {
+        index--;
+    } else {
+        index++;
+    }
+
+    typingTextEl.innerHTML = typingString.substring(0, index);
+
+    if (!isDeleting && index === typingString.length) {
+        setTimeout(() => isDeleting = true, 2000); // Dừng 2s khi gõ xong
+    } else if (isDeleting && index === 0) {
+        isDeleting = false;
+    }
+
+    const speed = isDeleting ? 40 : 70;
+    setTimeout(typeEffect, speed);
+}
+
+typeEffect();
